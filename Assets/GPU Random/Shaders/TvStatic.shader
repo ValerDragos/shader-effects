@@ -42,7 +42,7 @@ Shader "VGD/TV Static"
             fixed4 frag(v2f i) : SV_Target
             {
                 float seed = i.vertex.x * _XMultiplier + i.vertex.y * _YMultiplier;
-                float random = GetRandom(-1, seed);
+                float random = GetRandom(1, seed);
                 return fixed4(random, random, random, 1);
             }
 
