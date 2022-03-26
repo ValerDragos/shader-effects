@@ -5,17 +5,11 @@ using UnityEngine.UI;
 public class SquareGraphic : Graphic
 {
     private const float UV_DISTANCE = 0.7071067811865475f;
-    public Sprite sprite;
+
+    public Texture texture;
+    public override Texture mainTexture => texture;
 
     protected RectTransform _cacheRectTransform { get; private set; }
-
-    public override Texture mainTexture
-    {
-        get
-        {
-            return sprite != null? sprite.texture : null;
-        }
-    }
 
     private static readonly List<UIVertex> _vertices = null;
     private static readonly List<int> _indices = null;

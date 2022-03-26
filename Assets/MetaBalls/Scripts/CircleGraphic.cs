@@ -5,17 +5,10 @@ public class CircleGraphic : Graphic
 {
     private const float UV_DISTANCE = 1f;
 
-    public Sprite sprite;
+    public Texture texture;
+    public override Texture mainTexture => texture;
 
     protected RectTransform _cacheRectTransform { get; private set; }
-
-    public override Texture mainTexture
-    {
-        get
-        {
-            return sprite != null? sprite.texture : null;
-        }
-    }
 
     protected override void Awake()
     {
@@ -54,13 +47,5 @@ public class CircleGraphic : Graphic
                 color = color
             },
         });
-
-        //float majorRadius = rectTransform.rect.width * 0.5f;
-        //float minorRadius = rectTransform.rect.height * 0.5f;
-        //Vector2 center = Vector2.one * 0.5f - rectTransform.pivot;
-        //center = new Vector2(center.x * majorRadius * 2, center.y * minorRadius * 2);
-        //UIVertex vertex = UIVertex.simpleVert;
-        //float deltaAngle = Mathf.PI * 2 / divisions;
-        //int vertexCount = divisions * 2;
     }
 }

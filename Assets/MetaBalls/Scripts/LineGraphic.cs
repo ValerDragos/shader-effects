@@ -5,17 +5,10 @@ public class LineGraphic : Graphic
 {
     private const float UV_DISTANCE = 1f;
 
-    public Sprite sprite;
+    public Texture texture;
+    public override Texture mainTexture => texture;
 
     protected RectTransform _cacheRectTransform { get; private set; }
-
-    public override Texture mainTexture
-    {
-        get
-        {
-            return sprite != null? sprite.texture : null;
-        }
-    }
 
     protected override void Awake()
     {

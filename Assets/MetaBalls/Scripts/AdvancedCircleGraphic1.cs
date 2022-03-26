@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CanvasRenderer))]
 public class AdvancedCircleGraphic1 : Graphic
 {
-    public Sprite sprite;
+    public Texture texture;
     [Range(0f, 1f)]
     [SerializeField] private float _ringStart = 0.5f;
     [SerializeField] private float _ringOffset = 0f;
@@ -33,13 +33,7 @@ public class AdvancedCircleGraphic1 : Graphic
         };
     }
 
-    public override Texture mainTexture
-    {
-        get
-        {
-            return sprite != null? sprite.texture : null;
-        }
-    }
+    public override Texture mainTexture => texture;
 
     protected override void Awake()
     {
