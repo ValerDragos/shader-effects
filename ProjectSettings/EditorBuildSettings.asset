@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/MetaBalls/Scenes/MetaBalls.unity
+    guid: e4d5ee7af632e4945a2b17c35347b315
+  - enabled: 1
     path: Assets/GPU Random/Scenes/GPU Random.unity
     guid: 2e874831e99ad8846bd856346213ae03
   m_configObjects: {}

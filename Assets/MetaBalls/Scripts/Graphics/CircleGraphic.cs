@@ -1,20 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CircleGraphic : Graphic
+[RequireComponent(typeof(CanvasRenderer))]
+public class CircleGraphic : AbstractGraphic
 {
     private const float UV_DISTANCE = 1f;
-
-    public Texture texture;
-    public override Texture mainTexture => texture;
-
-    protected RectTransform _cacheRectTransform { get; private set; }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        _cacheRectTransform = GetComponent<RectTransform>();
-    }
 
     protected override void OnPopulateMesh(VertexHelper vh)
     {
@@ -26,25 +16,25 @@ public class CircleGraphic : Graphic
             {
                 position = new Vector3(rect.xMin, rect.yMin, 0),
                 uv0 = new Vector4(-UV_DISTANCE, -UV_DISTANCE, 0, 0),
-                color = color
+                color = _cornerColors.bottomLeft * color
             },
             new UIVertex()
             {
                 position = new Vector3(rect.xMin, rect.yMax, 0),
                 uv0 = new Vector4(-UV_DISTANCE, UV_DISTANCE, 0, 0),
-                color = color
+                color = _cornerColors.topLeft * color
             },
             new UIVertex()
             {
                 position = new Vector3(rect.xMax, rect.yMax, 0),
                 uv0 = new Vector4(UV_DISTANCE, UV_DISTANCE, 0, 0),
-                color = color
+                color = _cornerColors.topRight * color
             },
             new UIVertex()
             {
                 position = new Vector3(rect.xMax, rect.yMin, 0),
                 uv0 = new Vector4(UV_DISTANCE, -UV_DISTANCE, 0, 0),
-                color = color
+                color = _cornerColors.bottomRight * color
             },
         });
     }

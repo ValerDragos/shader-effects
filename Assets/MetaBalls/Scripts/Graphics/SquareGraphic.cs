@@ -2,14 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SquareGraphic : Graphic
+[RequireComponent(typeof(CanvasRenderer))]
+public class SquareGraphic : AbstractGraphic
 {
     private const float UV_DISTANCE = 0.7071067811865475f;
-
-    public Texture texture;
-    public override Texture mainTexture => texture;
-
-    protected RectTransform _cacheRectTransform { get; private set; }
 
     private static readonly List<UIVertex> _vertices = null;
     private static readonly List<int> _indices = null;
@@ -26,51 +22,40 @@ public class SquareGraphic : Graphic
         };
     }
 
-    protected override void Awake()
-    {
-        base.Awake();
-        _cacheRectTransform = GetComponent<RectTransform>();
-    }
-
     protected override void OnPopulateMesh(VertexHelper vh)
     {
         vh.Clear();
         var rect = _cacheRectTransform.rect;
         var uv0 = new Vector4(UV_DISTANCE, UV_DISTANCE, 0, 0);
-        //const float aaa = 0.6435942529055826f;//0.414213562373095f;
         _vertices.Add(new UIVertex()
         {
             position = new Vector3(rect.xMin, rect.yMin, 0),
             uv0 = uv0,
-            //uv0 = new Vector4(1, aaa),
-            color = color
+            color = _cornerColors.bottomLeft * color
         });
         _vertices.Add(new UIVertex()
         {
             position = new Vector3(rect.xMin, rect.yMax, 0),
             uv0 = uv0,
-            //uv0 = new Vector4(1, -aaa),
-            color = color
+            color = _cornerColors.topLeft * color
         });
         _vertices.Add(new UIVertex()
         {
             position = new Vector3(rect.xMax, rect.yMax, 0),
             uv0 = uv0,
-            //uv0 = new Vector4(1, aaa),
-            color = color
+            color = _cornerColors.topRight * color
         });
         _vertices.Add(new UIVertex()
         {
             position = new Vector3(rect.xMax, rect.yMin, 0),
             uv0 = uv0,
-            //uv0 = new Vector4(1, -aaa),
-            color = color
+            color = _cornerColors.bottomRight * color
         });
         _vertices.Add(new UIVertex()
         {
             position = rect.center,
             uv0 = new Vector4(0, 0, 0, 0),
-            color = color
+            color = GetColor(new Vector2(0.5f, 0.5f)) * color
         });
 
         vh.AddUIVertexStream(_vertices, _indices);
